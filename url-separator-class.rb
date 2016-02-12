@@ -5,6 +5,7 @@ class Separator
   attr_accessor :script_url, :from_offer_i, :offer_i, :platform, :from_platform, :product, :medium, :from_medium, :offer_rn, :from_offer_rn
 
   def initialize(redirect_from, redirect_to)
+    @redirect_from = redirect_from
     to_array = redirect_from.split("/")[2..-1]
     from_array = redirect_to.split("/")[2..-1]
 
@@ -48,11 +49,11 @@ class Separator
     return count
   end
 
-  # def script_url
-  #   platform
-  # end
+  def script_url
+    return "<script type=\"text/javascript\"> window.location = \"#{@redirect_from}?utm_source=offer#{@from_offer_i}#{@medium}\""
+  end
 end
 
-hello = Separator.new("http://direct.ninjakitchen.com/products/nutri-ninja-ninja-blender-duo-bl640/4/cpc/ngxviii/", "http://duo.ogt/4/cpc/ngxix/")
+example_urls = Separator.new("http://direct.ninjakitchen.com/products/nutri-ninja-ninja-blender-duo-bl640/4/cpc/ngxviii/", "http://duo.ogt/4/cpc/ngxix/")
 
 binding.pry
